@@ -217,3 +217,65 @@ Stochastic policy is the mapping of the state and action to the probability of t
 Let us see this on the concept of our waste collecting robot example.
 
 ![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-14_at_9.09.31_AM.png](assets/Screenshot_2020-08-14_at_9.09.31_AM.png)
+
+---
+
+# Gridworld Example
+
+Let us consider a very small world which are grids of green grassy patches of which two of these grids have mountains on them. 
+
+![assets/Screenshot_2020-08-14_at_9.18.44_AM.png](assets/Screenshot_2020-08-14_at_9.18.44_AM.png)
+
+The locations in this world can be considered as states in the environment.
+
+Let us say that the agent in any given time-step can move up,down,left or right and can only do actions which will not let it fall off the grid. We can represent this using arrows.
+
+![assets/Screenshot_2020-08-14_at_9.20.50_AM.png](assets/Screenshot_2020-08-14_at_9.20.50_AM.png)
+
+Let us say that the goal of the agent is to reach the bottom right corner and this task can be considered as an episodic task and when the agent reaches the goal an episode ends. Here we can leave out the possibility of the agent going out of the right bottom corner as the task ends there.
+
+![assets/Screenshot_2020-08-14_at_9.22.27_AM.png](assets/Screenshot_2020-08-14_at_9.22.27_AM.png)
+
+Now we need to assign rewards to actions the agent takes
+
+if the agent moves to a grassland let us give it a reward of -1
+
+If it moves to a mountain area let us give it a reward of  -3 
+
+If the agent reaches the goal let us give it a reward of 5.
+
+This reward structure encourages the agent to reach the goal as soon as possible since for every step it takes outside the goal it is receiving some kind of penalty.
+
+![assets/Screenshot_2020-08-14_at_9.25.06_AM.png](assets/Screenshot_2020-08-14_at_9.25.06_AM.png)
+
+When the agent reaches the goal it gets a reward of 5 and the episode ends.
+
+---
+
+# State-Value function
+
+Let us say before we start our learning we follow a very bad model to reach our goal we start from the top left corner and then we move through all the states and reach the last grid.
+
+![assets/Screenshot_2020-08-14_at_12.44.41_PM.png](assets/Screenshot_2020-08-14_at_12.44.41_PM.png)
+
+Now the we need to calculate the cumulative reward when we reach the final stage , we are not using the concept of discounted rate here or lets say we are using discount rate of 1, now the cumilative reward is -6.
+
+We can assign this number to the grid on top left corner.
+
+![assets/Untitled.png](assets/Untitled.png)
+
+Now let us start from the next adjacent grid and do the same and continue for all the grids, since this is an episodic tasks the task will stop when we reach the last grid or if we start from the last grid also the episode stops and we can just associate this with a reward of 0.
+
+![assets/Screenshot_2020-08-14_at_1.31.17_PM.png](assets/Screenshot_2020-08-14_at_1.31.17_PM.png)
+
+Hence the grid formed from this method is corresponds a number to the action the agent takes if it starts on that state.
+
+![assets/Screenshot_2020-08-14_at_1.32.25_PM.png](assets/Screenshot_2020-08-14_at_1.32.25_PM.png)
+
+We refer to this function as a state value function.
+
+We call the sate-value function for policy pie The value of state s under a policy pie,
+
+For each of the state s it yields the expected return if the agent starts in state s and then uses a policy pie to choose its action for all time-steps.
+
+---
