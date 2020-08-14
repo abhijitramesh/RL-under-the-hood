@@ -192,3 +192,28 @@ A finite Markov decision problem is defined by:
 Things like the state action and discount rate is known to the agent but the one step dynamics and rewards in unknown.
 
 ---
+
+# The RL Framework : The Solution
+
+# Policies
+
+We know that we use a MDP to make the framework for a RL problem. If we look at examples of training a humanoid robot how to walk we would notice that how the robot has to behave depends on lot of factors like the change in environment for example walking in a hilly terrain is different to walking in a normal terrain this is where the concept of policies come in.
+
+There are two kinds of policies
+
+1. Deterministic
+2. Stochastic
+
+ 
+
+## Deterministic Policy
+
+Deterministic policy can be defined as the mapping of a state to the action basically we can think of it as a factory that takes in the state and outputs the action.
+
+## Stochastic Policy
+
+Stochastic policy is the mapping of the state and action to the probability of the agent taking the said action. We can think of it as a factory given an action and a state outputting the probability that the agent takes the action in the given state.
+
+Let us see this on the concept of our waste collecting robot example.
+
+![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-14_at_9.09.31_AM.png](assets/Screenshot_2020-08-14_at_9.09.31_AM.png)
