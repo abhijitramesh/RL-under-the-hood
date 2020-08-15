@@ -279,3 +279,23 @@ We call the sate-value function for policy pie The value of state s under a poli
 For each of the state s it yields the expected return if the agent starts in state s and then uses a policy pie to choose its action for all time-steps.
 
 ---
+
+# Bellman Equation
+
+As we said above calculating the reward one by one would be very hard, bu what we can do is if we know the reward of a particular sate it is easy for us to calculate the discount of the nearby states.
+
+If we look closely the value function has a nice recursive property,
+
+![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-15_at_9.24.30_AM.png](assets/Screenshot_2020-08-15_at_9.24.30_AM.png)
+
+Let us erase some of the values then we would be left with something like this,
+
+here since we are using a discount rate of 1 to find the value of the intermediate grid we can just sum with the reward consider 2 if you add -1 we will get 1 which is the value for the adjacent grid we can continue this for all the grid.
+
+This applies to our simple world but how can we express this for a more complex world ?
+
+![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-15_at_9.27.10_AM.png](assets/Screenshot_2020-08-15_at_9.27.10_AM.png)
+
+We use the bellman expectation equation.
+
+---
