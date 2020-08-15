@@ -316,3 +316,12 @@ The optimal policy function is denoted by
 $V*$
 
 ---
+# Action Value Functions
+
+![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-15_at_11.57.45_AM.png](The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-15_at_11.57.45_AM.png)
+
+basically here also we are calculating a grid but instead of using denoting by one value we use 4 values to represent what happens when each action is taken by the agent this would look something like,
+
+![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-15_at_12.01.04_PM.png](The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-15_at_12.01.04_PM.png)
+
+---
