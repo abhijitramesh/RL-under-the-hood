@@ -216,7 +216,7 @@ Stochastic policy is the mapping of the state and action to the probability of t
 
 Let us see this on the concept of our waste collecting robot example.
 
-![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-14_at_9.09.31_AM.png](assets/Screenshot_2020-08-14_at_9.09.31_AM.png)
+![assets/Screenshot_2020-08-14_at_9.09.31_AM.png](assets/Screenshot_2020-08-14_at_9.09.31_AM.png)
 
 ---
 
@@ -286,7 +286,7 @@ As we said above calculating the reward one by one would be very hard, bu what w
 
 If we look closely the value function has a nice recursive property,
 
-![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-15_at_9.24.30_AM.png](assets/Screenshot_2020-08-15_at_9.24.30_AM.png)
+![assets/Screenshot_2020-08-15_at_9.24.30_AM.png](assets/Screenshot_2020-08-15_at_9.24.30_AM.png)
 
 Let us erase some of the values then we would be left with something like this,
 
@@ -294,25 +294,50 @@ here since we are using a discount rate of 1 to find the value of the intermedia
 
 This applies to our simple world but how can we express this for a more complex world ?
 
-![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-15_at_9.27.10_AM.png](assets/Screenshot_2020-08-15_at_9.27.10_AM.png)
+![assets/Screenshot_2020-08-15_at_9.27.10_AM.png](assets/Screenshot_2020-08-15_at_9.27.10_AM.png)
 
 We use the bellman expectation equation.
 
 ---
 # Optimally
 
-![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-15_at_11.20.59_AM.png](assets/Screenshot_2020-08-15_at_11.20.59_AM.png)
+![assets/Screenshot_2020-08-15_at_11.20.59_AM.png](assets/Screenshot_2020-08-15_at_11.20.59_AM.png)
 
 Let us compare two state value policies, we can see a pattern here the one on the left is the values are less that that of on the right or the once on the right are greater than or equal to the once on the left, this means the the one on the right offers a better reward function than the one on the left.
 
 Similarly the goal of the agent would be to find the optimal policy in this, by definition we can say
 
-![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-15_at_11.23.16_AM.png](assets/Screenshot_2020-08-15_at_11.23.16_AM.png)
+![assets/Screenshot_2020-08-15_at_11.23.16_AM.png](assets/Screenshot_2020-08-15_at_11.23.16_AM.png)
 
 This defines optimality and the goal of the agent is to find the optimal solution to the MVP that is defined.
 
 The optimal policy function is denoted by 
 
 $V*$
+
+---
+# Action Value Functions
+
+![assets/Screenshot_2020-08-15_at_11.57.45_AM.png](assets/Screenshot_2020-08-15_at_11.57.45_AM.png)
+
+basically here also we are calculating a grid but instead of using denoting by one value we use 4 values to represent what happens when each action is taken by the agent this would look something like,
+
+![assets/Screenshot_2020-08-15_at_12.01.04_PM.png](assets/Screenshot_2020-08-15_at_12.01.04_PM.png)
+
+---
+
+# Optimal Policy
+
+The goal is basically for the agent to construct an action value function by interacting with the environment and uses
+
+![assets/Screenshot_2020-08-15_at_12.20.09_PM.png](assets/Screenshot_2020-08-15_at_12.20.09_PM.png)
+
+This is what we have right now.
+
+All we have to do to find the optimal value is to follow the grid in each step for the higher value this would give us the optimal policy.
+
+![assets/Screenshot_2020-08-15_at_12.27.02_PM.png](assets/Screenshot_2020-08-15_at_12.27.02_PM.png)
+
+This is what that would look like , in the grid where it is 1 for all values we can actually follow any path and would yield the optimal result.
 
 ---
