@@ -299,3 +299,20 @@ This applies to our simple world but how can we express this for a more complex 
 We use the bellman expectation equation.
 
 ---
+# Optimally
+
+![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-15_at_11.20.59_AM.png](assets/Screenshot_2020-08-15_at_11.20.59_AM.png)
+
+Let us compare two state value policies, we can see a pattern here the one on the left is the values are less that that of on the right or the once on the right are greater than or equal to the once on the left, this means the the one on the right offers a better reward function than the one on the left.
+
+Similarly the goal of the agent would be to find the optimal policy in this, by definition we can say
+
+![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-15_at_11.23.16_AM.png](assets/Screenshot_2020-08-15_at_11.23.16_AM.png)
+
+This defines optimality and the goal of the agent is to find the optimal solution to the MVP that is defined.
+
+The optimal policy function is denoted by 
+
+$V*$
+
+---
