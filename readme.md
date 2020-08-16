@@ -341,3 +341,35 @@ All we have to do to find the optimal value is to follow the grid in each step f
 This is what that would look like , in the grid where it is 1 for all values we can actually follow any path and would yield the optimal result.
 
 ---
+# Dynamic Programming
+
+This is a problem which is more simple than the RL problem here the agent has full knowledge about the environment.
+
+Let us consider a more simpler example
+
+with just 4 grids and one mountain and by applying similar reward funcitons
+
+![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-15_at_6.15.08_PM.png](assets/Screenshot_2020-08-15_at_6.15.08_PM.png)
+
+As discussed earlier we need to define the action value function for each of the state in the world
+
+If we consider the first grid let us name it s1 in this grid we can either move left or right and the probability of moving right is 0.5 and so is the probability of moving left. Let us use the same concept for all the states.
+
+![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-16_at_1.16.04_PM.png](assets/Screenshot_2020-08-16_at_1.16.04_PM.png)
+
+To find the bellman equation from this what we can do is to multiply the probability of each state to the reward for the taken action and the reward at that stage
+
+![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-16_at_1.18.26_PM.png](assets/Screenshot_2020-08-16_at_1.18.26_PM.png)
+
+Once we have the reward for all these states we can just use the system of equations to find the values for each states.
+
+This is a bit cumbersome method but there is an iterative method which we can follow that is initially we can guess the value for every stage and move from one stage to another and then update the values and eventually we would converge to the result.
+
+![The%20RL%20Framework%20The%20Solution%20be876f21ee54498b8b99e23b975f6965/Screenshot_2020-08-16_at_1.20.24_PM.png](assets/Screenshot_2020-08-16_at_1.20.24_PM.png)
+
+What this basically means is converting the equations we have earlier to an update rule.
+
+## [Solving Open AI Frozen Lake using Dynamic Programming](https://github.com/abhijitramesh/RL-under-the-hood/blob/master/frozenlake/Dynamic_Programming.ipynb)
+
+---
+
