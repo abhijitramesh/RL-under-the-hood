@@ -373,3 +373,58 @@ What this basically means is converting the equations we have earlier to an upda
 
 ---
 
+# Monte Carlo Method
+
+# Introduction
+
+Previously we solved the frozen-lake environment problem from OpenAI using Dynamic Programming Now we will focus on doing something better that is for dynamic programming we assume that the agent knows everything about the environment and it takes decision now we are going to follow a different approach where the agent is not given any knowledge of the environment and since this is one of the underlying principle of reinforcement learning we are going to use this for the future methods also.
+
+---
+
+# MC Prediction : State Values
+
+Lets say that the we have a very small frozen lake environment with x y and z, the goal of the agent is to reach z and thereby ending the episode. When the agent is at x or y it receives a reward and a state and chooses the next action. Similarly let us assume that the agent did the same for 3 episodes following three policies.
+
+![assets/Screenshot_2020-08-17_at_1.46.53_PM.png](assets/Screenshot_2020-08-17_at_1.46.53_PM.png)
+
+What monte carlo method tells us is to take observe one state determine the cumulative reward of that state then average the value to find the approximation for the value of that state.
+
+![assets/Screenshot_2020-08-17_at_1.48.07_PM.png](assets/Screenshot_2020-08-17_at_1.48.07_PM.png)
+
+Here we are following the state X
+
+Let us follow the sate Y but here there are multiple occurrence of the sate in each step so we need to follow only one of them and for that we consider that each visit as an entry to the sate and we need to determine if we want to follow first entry or second entry Monte Carlo method.
+
+![assets/Screenshot_2020-08-17_at_1.51.00_PM.png](assets/Screenshot_2020-08-17_at_1.51.00_PM.png)
+
+Here we are considering the first visit MC method.
+
+Another approach would be to consider all the visits to all the instances of the state Y
+
+![assets/Screenshot_2020-08-17_at_1.52.19_PM.png](assets/Screenshot_2020-08-17_at_1.52.19_PM.png)
+
+---
+
+# MC Prediction : Action Value
+
+In the dynamic programming example we converted the state value to action value similarly here also we need to obtain the action value so we have to do a bit of modificaiton insted of selecting the state we select the state action pair
+
+![assets/Screenshot_2020-08-17_at_2.53.15_PM.png](assets/Screenshot_2020-08-17_at_2.53.15_PM.png)
+
+But here the problem is since we are selecting the pair from the states that the agent has visited pairs such as X and down and Y and up cannot be determined so the solution to this is we only deal with stochastic policy and not deterministic policy.
+
+![assets/Screenshot_2020-08-17_at_2.55.40_PM.png](assets/Screenshot_2020-08-17_at_2.55.40_PM.png)
+
+Here the agent eventually visits all the states given enough number of episodes.
+
+---
+
+# MC Control : Incremental means
+
+We will be following generalized policy evaluation here, if we follow the current evaluation policy we will need at-least 5k episodes to do an update but instead if we keep track on a running average and also update in each episode we would get a much better , to make a computationally easy algorithm we need to apply some math. 
+
+![assets/Screenshot_2020-08-17_at_3.12.58_PM.png](assets/Screenshot_2020-08-17_at_3.12.58_PM.png)
+
+This is the basic idea now we need to implement this in MC method.
+
+# [Solving BlackJack using Monte Carlo Method](https://github.com/abhijitramesh/RL-under-the-hood/tree/master/blackjack)
