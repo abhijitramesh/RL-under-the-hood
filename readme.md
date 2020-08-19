@@ -428,3 +428,78 @@ We will be following generalized policy evaluation here, if we follow the curren
 This is the basic idea now we need to implement this in MC method.
 
 # [Solving BlackJack using Monte Carlo Method](https://github.com/abhijitramesh/RL-under-the-hood/tree/master/blackjack)
+
+# Temporal Difference Method
+
+# Introduction
+Imagine a humanoid robot for this robot to mimic things exactly like human beings we cannot consider the task to be episodic, Consider the example of monte carol method if it has to learning anything it needs the episode to end converting this to self driving car terms every time the algorithm needs to learn something the car needs to crash this is not acceptable and is very expensive hence we need to follow a better approach this is where temporal difference methods comes to play the agent can be learning every day and all day just like how we are interacting with the streams of data over the internet. Temporal Difference methodcan be applied to solve episodic as well as continues task.
+
+In the heart of all the state of the art models that we read and see about in the internet lies this method.
+
+---
+# TD Prediction : TD(0)
+
+In the MC approach we take a look at a state actin pair and if it is our first visit we update the sate, but a thing to note here is that the policy does not change between episodes.
+
+
+![assets/Screenshot_2020-08-19](assets/Screenshot_2020-08-19.png)
+
+Here is we are instead keeping track of the state values we use a different equation
+
+![assets/Formula_1](assets/Formula_1.png)
+
+Here we can use the bellman equation to do some modification to the update statement we can plug in the equation to obtain
+
+![assets/Formula_1](assets/formula_2.png)
+
+
+What this mean is here the update statement is not only aware of the current state but it is also taking into consideration the discounted value of a upcoming state.
+
+Why are we doing this mainly this removed any kinds of mention of the ending of the episodic task and moreover we can update the value in each time-step.
+
+So now before taking any action the agent only depends on the current value state but when the update is done we consider the possibility of value of new state and reward.
+
+![assets/Formula_1](assets/formula_3.png)
+
+We refer to this as TD target
+
+Basically what this equation does is find a middle ground between the previous estimate and the next estimate and we can set the value of alpha according to which estimate we trust  more.
+
+![assets/Formula_1](assets/formula_4.png)
+
+Here we can visualize this concepts, the update statement has been updated so when the value of alpha is set to one we trust the next state and when in is it to zero we trust the pervious state also we do not ever do and ideally we set the value close to zero so that the agent learns something.
+
+The algorithm that we implement to do the same is called one-step TD or TD(0)
+
+![assets/Formula_1](assets/formula_5.png)
+
+---
+
+# TD Prediction : Action Values
+In order to convert the TD prediction to Action Values all we have to do in the update statement is to move form every state to ever state action pairs.
+
+![assets/Formula_1](assets/formula_6.png)
+
+And also instead of waiting for each state we move to each state action pair to do the update.
+
+And if the agent interacts with the environment long enough the agent would have a pretty good understanding of how the environment works.
+
+---
+
+# TD Control : Sarsa(0)
+To do the control what we do here is to use an epsilon greedy algorithm. We start with selecting an epsilon as 1 and then selecting the 0 or 1 in equal probability after we update the state action pair and construct a policy to update the epsilon greedy policy the algorithm is called sarsa(0).
+
+# TD Control : Sarsamax or Q-Learning
+
+![assets/Formula_1](assets/formula_7.png)
+Basically what we are doing here is changing the epsilon greedy method with a greedy method by choosing the reward which maximizes the state and action pair value for the next state.
+
+---
+![assets/Formula_1](assets/formula_8.png)
+
+What expected Sarsa does is that the agent selects the probability that the agent selects an action and returns the respective action value pair.
+
+---
+
+# [Solving Clif Walking using Temporal Method](https://github.com/abhijitramesh/RL-under-the-hood/tree/master/clifwalking)
+---
