@@ -503,3 +503,190 @@ What expected Sarsa does is that the agent selects the probability that the agen
 
 # [Solving Clif Walking using Temporal Method](https://github.com/abhijitramesh/RL-under-the-hood/tree/master/clifwalking)
 ---
+
+# Deep Reinforcement Learning
+
+# Introduction
+
+Deep reinforcement using deep learning uses multi layered neural networks to do reinforcement learning.
+
+Reinforcement learning is classified into two 
+
+1. Model Based Approaches
+    1. Policy Iteration
+    2. Value Iteration
+2. Model Free Approaches
+    1. Monte Carlo Method
+    2. Temporal Difference Learning
+
+In a nut shell RL problem that are discussed above are consist of limited state and action spaces but most real world problems are very large and consist of continuous real value numbers.
+
+This is where Deep Reinforcement Learning comes in with Deep Q Learning and algorithms that directly optimize the policy like policy gradient. There there are approaches which combine the best of both worlds Actor-Critic Method.
+
+---
+
+# Discrete VS Continuous Spaces
+
+The cases what we have learned are used to deal with discrete cases for example in approaches such as policy iteration we have a loop that iterates over all the states abd
+
+![assets/Screenshot_2020-08-21_at_4.22.04_PM.png](assets/Screenshot_2020-08-21_at_4.22.04_PM.png)
+
+and even in model free approaches we consider such stuff for example
+
+![assets/Screenshot_2020-08-21_at_4.22.46_PM.png](assets/Screenshot_2020-08-21_at_4.22.46_PM.png)
+
+Basically what continuous means is something that contradicts discrete
+
+![assets/Screenshot_2020-08-21_at_4.23.45_PM.png](assets/Screenshot_2020-08-21_at_4.23.45_PM.png)
+
+How does this mean in RL terms well uptill now we considered everything to be a grid worls where the agent moves from one grid to another but then if we consider real would there are no grid a robot may have to move from so and so distance away from the wall while avoiding obsructions.
+
+![assets/Screenshot_2020-08-21_at_4.25.21_PM.png](assets/Screenshot_2020-08-21_at_4.25.21_PM.png)
+
+![assets/Screenshot_2020-08-21_at_4.25.30_PM.png](assets/Screenshot_2020-08-21_at_4.25.30_PM.png)
+
+This is an example of continuous space but lets  say that we are teaching a robot to throw a dart in this case the robot has to select various factors such as the amount of force and the angle etc.. from a continuous space to execute so that it can learn how to do the task optimally.
+
+The strategy that we use to do such stuff are mainly discretization and function approximation.
+
+---
+
+# Discretization
+
+Converting a continuous space into discrete space is called discretization,
+
+Let us consider the vacuum cleaner robot from the above example we draw a virtual grid to the continuous space, we don't tell the robot to be exactly in the center of this position since that is not ideal and weather the robot is in (3.1,2.5) or (3.6,2.1) we can round this off to (3,2), yes this might cause some kind of errors in some environments but we should be fine for most part.
+
+Actions can also be discretized for example we can round off 90.4 to 90 degree and so on.
+
+![assets/Screenshot_2020-08-22_at_11.24.00_AM.png](assets/Screenshot_2020-08-22_at_11.24.00_AM.png)
+
+Let us say that there are objects in this world, in this grid worlds we mark off these spaces and call them occupancy grids. 
+
+Two solution to this is 
+
+Vary the grid at spaces where its required
+
+Alternate approach would be to divide the grid into smaller grids where required
+
+![assets/Screenshot_2020-08-22_at_11.37.02_AM.png](assets/Screenshot_2020-08-22_at_11.37.02_AM.png)
+
+![assets/Screenshot_2020-08-22_at_11.37.26_AM.png](assets/Screenshot_2020-08-22_at_11.37.26_AM.png)
+
+Why do we divide the grid at only the necessary spaces because if we do for the whole space we will end up increasing the state spaces.
+
+Now we might think how to apply this knowledge to something other than a grid world lets take the example for automatic transmission cars
+
+![assets/Screenshot_2020-08-22_at_11.54.08_AM.png](assets/Screenshot_2020-08-22_at_11.54.08_AM.png)
+
+The reward here is inversely promotional to the fuel consumption and the speed can be discretized into ranges, the fact is there is a single gear is the most optimal in each range these ranges can non uniform and if there are more factors to this like throttle position they can be sub divided as well.
+
+---
+
+# [Notebook for implementation of Discretization in  Q-learning on MountainCar environment](https://github.com/abhijitramesh/RL-under-the-hood/blob/master/Discretization.ipynb)
+
+---
+
+# Tile Coding
+
+If we already know the state space we can use a more generic method to split the environment as grid one of this method is called tile coding
+
+Basically what this means is we can overlay grids on top of each other by offsetting it a bit so that any point on this can be identified by the tiles that it activates.
+
+ 
+
+![assets/Screenshot_2020-08-22_at_1.46.25_PM.png](assets/Screenshot_2020-08-22_at_1.46.25_PM.png)
+
+If we assign a bit for the tiles we can represent the state space as a bit vector with 1s for the tiles that get activated and 0s else where
+
+In the tile coding algorithm instead of representing as a separate state  we represent it as binary vectors and also associate a weight and the tile coding algorithm update these weights iteratively this ensures that the nearby values that share tiles also share some component of state value smoothing the learning value function.
+
+The drawbacks of tile coding is that we should select the number of tiles offset and similar characteristics.
+
+![assets/Screenshot_2020-08-22_at_2.13.05_PM.png](assets/Screenshot_2020-08-22_at_2.13.05_PM.png)
+
+---
+
+# Adaptive Tile Coding
+
+This is a better method for tile coding basically what this means is we start with a bigger tile and split it into two whenever required. We split when we know that our value function is not changing or basically when our model is no longer learning.
+
+we can stop splitting when we reach a upper bound of splits.
+
+In order to find which tile to split we need to find which one is more likely to have greatest effect in the value. In-order to do this we keep track of projected weights to the corresponding to the tile.
+
+Adaptive coding lets us eliminate the use of manually setting offsets number of tiles etc...
+
+---
+
+# [Tile Coding on Acrobot](https://github.com/abhijitramesh/RL-under-the-hood)
+
+---
+
+# Course Coding
+
+![assets/Screenshot_2020-08-23_at_11.28.54_PM.png](assets/Screenshot_2020-08-23_at_11.28.54_PM.png)
+
+Course uses circles instead of grids and a state on it would activate the circles that are coinciding here this can also be translated to binary vectors with one for those circles and zero for the rest. This is done in a 2d space but we can extend this to a higher dimension where circles become sphere and hyper spheres.
+
+![assets/Screenshot_2020-08-24_at_1.09.13_AM.png](assets/Screenshot_2020-08-24_at_1.09.13_AM.png)
+
+Using small circles gives us less generalization but a higher resolution where as using a bigger circles give us better generalization resulting in a smooth value function but we might loose some resolution.
+
+ 
+
+## Radial Basis Function
+
+Coarse coding is similar to tile coding where we form vectors with 1 for spaces which are active and 0 for non active an extension of this idea is to use the distance from center of that circle to see how active that feature is these measures can be used by a gaussian or bell shaped curve centered on the circle which is known as a radial basis function. This is also a continuous feature but we can make them smaller compared to continuous state spaces.
+
+---
+
+# Function Approximation
+
+The limitation to discretization is that if the underlying continuous space is too large we might end up making the discretization also so large that we loose its advantage more over in continuous spaces the function value is very smooth while transaction from one state to other but in discretization this is not how it happens.
+
+What we are after is the state functon or value funciton ideally capturing this is practically in-feaseble and hence we try out best to apporximate this. we represent this by using a state w in the function which shows a vector which shapes the function.
+
+![assets/Screenshot_2020-08-24_at_1.30.22_AM.png](assets/Screenshot_2020-08-24_at_1.30.22_AM.png)
+
+Some ways to do it are mapping a state to its value, mapping a state and action to its q value or even mapping a state to a set of q vauels.
+
+Let us see how we do the apporximation of state to value,
+
+![assets/Screenshot_2020-08-24_at_1.31.39_AM.png](assets/Screenshot_2020-08-24_at_1.31.39_AM.png)
+
+First we need a vector representing the state this is the feature vector and also we have another vector for our parameters inorder to get the scalar value all we have to do is a dot product.
+
+---
+
+# Linear function approximation
+
+![assets/Screenshot_2020-08-24_at_12.20.49_PM.png](assets/Screenshot_2020-08-24_at_12.20.49_PM.png)
+
+Let us say we have formed the value of the weights w randomly and have computed the value of the state v-hat(s,w)
+
+How do we converge to the correct value of w, well since this is an optimization problem we can use gradient descent.
+
+![assets/Screenshot_2020-08-24_at_12.31.56_PM.png](assets/Screenshot_2020-08-24_at_12.31.56_PM.png)
+
+How this works basically is the value of alpha is our learning rate and in each step we step the value with the rate of that error away from the error.
+
+We can also do the same for action value also we just need to take the feature matrix as the action and states.
+
+And if we are mapping a state to actions what we can do is change our weight vector to weight matrix this help us to output different action value pairs
+
+![assets/Screenshot_2020-08-24_at_12.36.41_PM.png](assets/Screenshot_2020-08-24_at_12.36.41_PM.png)
+
+The only limitation to linear function approximation is as the name suggest this can be applied to linear functions and if we are solving a non linear problem this would give a bad result.
+
+---
+
+# Non-Linear function approximation
+
+We can apply the same solution as we do to linear function approximation but the catch here is we pass the dot product to a non-linear function, yes this is the activation function which is exactly the basis of artificial neural networks.
+
+![assets/Screenshot_2020-08-24_at_12.44.07_PM.png](assets/Screenshot_2020-08-24_at_12.44.07_PM.png)
+
+Here also we can use gradient descent to update the value of the weights.
+
+---
