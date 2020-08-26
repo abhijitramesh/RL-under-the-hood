@@ -835,3 +835,80 @@ Compared to vannila DQN we divide the linear networks into two one which learns 
 # [Deep Q learning Using Tensor-flow](https://github.com/abhijitramesh/RL-under-the-hood/blob/master/Q-learning-cart.ipynb)
 
 ---
+# Policy-Based Method
+
+# Introduction
+
+Until now we tried to learn how to do reinforcement learning by learning the states and action to device a policy but how about we directly learn the policy instead this is called policy based method.
+
+---
+
+# Why Policy-Based Methods
+
+- Simplicity
+- Scholastic Polices
+- Continuous Actions spaces
+
+# Policy Function Approximation
+
+![assets/Screenshot_2020-08-26_at_9.20.15_PM.png](assets/Screenshot_2020-08-26_at_9.20.15_PM.png)
+
+![assets/Screenshot_2020-08-26_at_9.20.24_PM.png](assets/Screenshot_2020-08-26_at_9.20.24_PM.png)
+
+![assets/Screenshot_2020-08-26_at_9.20.37_PM.png](assets/Screenshot_2020-08-26_at_9.20.37_PM.png)
+
+![assets/Screenshot_2020-08-26_at_9.21.01_PM.png](assets/Screenshot_2020-08-26_at_9.21.01_PM.png)
+
+---
+
+# Stochastic policy search
+
+Imagine that we are trying to clime a hill this hill represents our policy if we start at a random point and then try climbing as we go closer and closer to the top we would end up getting our policy this is called hill climbing using this method we might not reach the top of the hill in the most efficient route.
+
+Another approach to explore the nearby area and then follow which ever is giving the best values we can visualize this in a plot
+
+![assets/Screenshot_2020-08-26_at_10.20.26_PM.png](assets/Screenshot_2020-08-26_at_10.20.26_PM.png)
+
+Another method is we select a path of circle and then explore the region reduce the radius as we keep on going further deeper.
+
+![assets/Screenshot_2020-08-26_at_10.25.40_PM.png](assets/Screenshot_2020-08-26_at_10.25.40_PM.png)
+
+This method is called simulated annealing.
+
+Another method is called Adaptive Noise what this basically does is reduce the radius if we are closer to the value and increase if we are further away.
+
+![assets/Screenshot_2020-08-26_at_10.38.38_PM.png](assets/Screenshot_2020-08-26_at_10.38.38_PM.png)
+
+There are some limitations to this approach also we may get stuck in a local optima or even take a long time to converge.
+
+---
+
+# Policy Gradients
+
+let us think that we are aware of the following conditions
+
+![assets/Screenshot_2020-08-26_at_10.45.09_PM.png](assets/Screenshot_2020-08-26_at_10.45.09_PM.png)
+
+ Here we are able to find the value by continuing the gradient but if the objective is very complex its very hard to calculate the gradient.
+
+![assets/Screenshot_2020-08-26_at_10.45.56_PM.png](assets/Screenshot_2020-08-26_at_10.45.56_PM.png)
+
+This is one way of doing the gradient calculation but if we have access to the underlying policy we can calculate it analytically.
+
+![assets/Screenshot_2020-08-26_at_10.46.51_PM.png](assets/Screenshot_2020-08-26_at_10.46.51_PM.png)
+
+![assets/Screenshot_2020-08-26_at_10.47.02_PM.png](assets/Screenshot_2020-08-26_at_10.47.02_PM.png)
+
+Translating this to RL terms looks like this
+
+![assets/Screenshot_2020-08-26_at_10.47.46_PM.png](assets/Screenshot_2020-08-26_at_10.47.46_PM.png)
+
+---
+
+# Mote Carlo Policy Gradient
+
+## Reinforce Algorithm
+
+![assets/Screenshot_2020-08-26_at_10.54.08_PM.png](assets/Screenshot_2020-08-26_at_10.54.08_PM.png)
+
+---
