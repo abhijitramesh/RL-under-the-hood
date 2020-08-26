@@ -690,3 +690,148 @@ We can apply the same solution as we do to linear function approximation but the
 Here also we can use gradient descent to update the value of the weights.
 
 ---
+# Deep Q Learning
+
+# Neural networks as Value Function
+
+Neural networks are thought of as universal function approximations,
+
+![assets/Screenshot_2020-08-24_at_1.36.20_PM.png](assets/Screenshot_2020-08-24_at_1.36.20_PM.png)
+
+What we do in reinforcement learning is device a policy which maps a state to a real number we can do the same using a neural network all we have to do in input the states as a feature vector pass it through a neural network to get the value which can be represented as v pi of s,w where w is the weights of the neural network.
+
+How do we learn these weights ? well gradient decent.
+
+![assets/Screenshot_2020-08-24_at_1.38.47_PM.png](assets/Screenshot_2020-08-24_at_1.38.47_PM.png)
+
+If we know the final value we can use this to calculate the loss and then use gradient descent to update our weights through back-propagation.
+
+Now the question is how do we find out the loss ? this is where we apply our knowledge of Reinforcement Learning.
+
+This is where reinforcement learning differs from supervised learning.
+
+---
+
+## Monte-Carlo Method
+
+We can plug in the monte carol return which is the cumulative reward discounted to the update statement of gradient descent.
+
+![assets/Screenshot_2020-08-24_at_1.44.01_PM.png](assets/Screenshot_2020-08-24_at_1.44.01_PM.png)
+
+We can do the same for action value pair also.
+
+### The algorithm to do monte carol with function approximation
+
+![assets/Screenshot_2020-08-24_at_1.46.01_PM.png](assets/Screenshot_2020-08-24_at_1.46.01_PM.png)
+
+---
+
+## Temporal-Difference method
+
+Here instead of using the actual return we use an estimated return
+
+![assets/Screenshot_2020-08-24_at_1.48.59_PM.png](assets/Screenshot_2020-08-24_at_1.48.59_PM.png)
+
+![assets/Screenshot_2020-08-24_at_1.49.23_PM.png](assets/Screenshot_2020-08-24_at_1.49.23_PM.png)
+
+### The algorithm to do SARSA with function approximation
+
+![assets/Screenshot_2020-08-24_at_1.51.13_PM.png](assets/Screenshot_2020-08-24_at_1.51.13_PM.png)
+
+This has some drawbacks the policy being learned and the one being followed are almost the same.
+
+If we want to learn a more exploratory policy we need off-policy algorithms.
+
+---
+
+# Deep Q learning
+
+![assets/Screenshot_2020-08-24_at_1.54.50_PM.png](assets/Screenshot_2020-08-24_at_1.54.50_PM.png)
+
+we use the same algorithm as  SARSA but the difference is in the update step, instead of choosing the next action from the same policy we choose an action greedily which would maximize the expected value going forward we do not take this action it is only used for performing the update.
+
+hence we are using different policies.
+
+To change this to a continuous task we can either treat episodes as a very long task or remove the concept of episodes as a whole.
+
+![assets/Screenshot_2020-08-24_at_1.59.11_PM.png](assets/Screenshot_2020-08-24_at_1.59.11_PM.png)
+
+The catch is we need to set some kind of control to see if our algorithm is learning properly or if its failing.
+
+### Advantages of Off-policy learning
+
+- More exploration while learning
+- learning from demonstation
+- supports offline/batch learning
+
+---
+
+# Deep - Q network
+
+In 2015 deep mind made a break through when they developed a network which played video games better than human beings without being given any access to the underlying environment and only the pixel values which a human player might also see.
+
+![assets/Screenshot_2020-08-25_at_11.58.05_PM.png](assets/Screenshot_2020-08-25_at_11.58.05_PM.png)
+
+How this works is by the neural network which acts as a function approximate is given the input image as the states in the screen the network sees the screen and outputs a set of action values the maximum of which is the action to be taken. For back-propagation the network is given the scores as reward.
+
+![assets/Screenshot_2020-08-26_at_12.01.08_AM.png](assets/Screenshot_2020-08-26_at_12.01.08_AM.png)
+
+Let us see how complex the state space is the the space is 210 length and 160 wide and each pixel can have 256 possible values to make this a bit more easy to handle deep mind transformed the image to grey scale and then made them squares of 84 by 84 and in-order to make the network learn sequential data they stacked 4 layers on top of each other making it 84x84x4.
+
+![assets/Screenshot_2020-08-26_at_12.13.19_AM.png](assets/Screenshot_2020-08-26_at_12.13.19_AM.png)
+
+To neural network is made to produce a set of actions once the set is produced we can select the required action either scholastically or by taking the maximum value of the actions produced.
+
+![assets/Screenshot_2020-08-26_at_9.23.58_AM.png](assets/Screenshot_2020-08-26_at_9.23.58_AM.png)
+
+This is the neural network uses by deep-mind there are convolutional layers which allows the model to learn about the spatial elements this is then passed to a series of convolution as well as relu activation function then there comes a fully connected layers which again has relu activation functions and finally mapped to an action space.
+
+The same network was used for all the Atari-games Deep mind tested it on but each time the network was trained from scratch.
+
+---
+
+# Experienced Replay
+
+This is basically like collecting a set of data by practicing out with the interaction to the environment and then later learning  mapping from these practices on what action to take.
+
+In a normal SARSA approach once we get a state-action-reward-next-state-action tuple we learn from this and discard these values. This is not helpful we need to make more use out of it since some of the actions may be very costly and others might be very rare. We can store them in a replay buffer and then select a sequence from this to do the learning. There is still a problem the action is always related to the next state and the agent might end up learning these patterns rather than deciding a perfect strategy for this what we do is sample our at random from the buffer and then use these samples to train the agent avoiding oscillation of values.
+
+---
+
+# Deep Q learning Algoritham
+
+![assets/Screenshot_2020-08-26_at_8.18.30_PM.png](assets/Screenshot_2020-08-26_at_8.18.30_PM.png)
+
+---
+
+# Improvements in DQN
+
+## Overestimation of Q-values
+
+![assets/Screenshot_2020-08-26_at_8.20.37_PM.png](assets/Screenshot_2020-08-26_at_8.20.37_PM.png)
+
+If we look here we can see that the value of arg-max might be giving us unexpected result since the values might now be ready on the initial stages of learning
+
+![assets/Screenshot_2020-08-26_at_8.23.03_PM.png](assets/Screenshot_2020-08-26_at_8.23.03_PM.png)
+
+The solution to this is to have another set of parameters w' which can evaluate the action which is selected.
+
+Here since we would be using fixed q learning we have w- which we can repurpose for w' since it is help frozen for a while.
+
+## Priorities Enhancement Replay
+
+![assets/Screenshot_2020-08-26_at_8.29.43_PM.png](assets/Screenshot_2020-08-26_at_8.29.43_PM.png)
+
+Here we add a priority to the Replay Buffer so that the values taken in random is not biased and we can learn more from values which has more error and thereby improving the algorithm a lot.
+
+## Dueling Networks
+
+![assets/Screenshot_2020-08-26_at_8.32.03_PM.png](assets/Screenshot_2020-08-26_at_8.32.03_PM.png)
+
+Compared to vannila DQN we divide the linear networks into two one which learns the state-values and other which learns the advantage values then we combine them together to obtain the Q value thereby getting a better performance compared to vanilla DQN's
+
+---
+
+# [Deep Q learning Using Tensor-flow](https://github.com/abhijitramesh/RL-under-the-hood/blob/master/Q-learning-cart.ipynb)
+
+---
