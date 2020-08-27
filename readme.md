@@ -912,3 +912,66 @@ Translating this to RL terms looks like this
 ![assets/Screenshot_2020-08-26_at_10.54.08_PM.png](assets/Screenshot_2020-08-26_at_10.54.08_PM.png)
 
 ---
+# Actor-Critic Method
+
+Actor-critic methods are TD methods that have a separate memory structure to explicitly represent the policy independent of the value function. The policy structure is known as the actor, because it is used to select actions, and the estimated value function is known as the critic, because it criticizes the actions made by the actor. Learning is always on-policy: the critic must learn about and critique whatever policy is currently being followed by the actor. The critique takes the form of a TD error.
+
+---
+
+# Better Score function
+
+![Actor-Critic%20Method%2029e6b0ae5d9f4cc3b1b7af950609e3ce/Screenshot_2020-08-27_at_10.34.21_AM.png]assets/Screenshot_2020-08-27_at_10.34.21_AM.png)
+
+This is what the score function looks like currently and we are updating at the end of an eposide we are updating the value there must be a better way to do this.
+
+If our talk is not episodic we keep on jumping from one state to another.
+
+![Actor-Critic%20Method%2029e6b0ae5d9f4cc3b1b7af950609e3ce/Screenshot_2020-08-27_at_10.41.17_AM.png]assets/Screenshot_2020-08-27_at_10.41.17_AM.png)
+
+We can use this better update method which uses the value of state action pair here we are using a second learning rate which is used for value updates.
+
+---
+
+# Two function approximation
+
+![Actor-Critic%20Method%2029e6b0ae5d9f4cc3b1b7af950609e3ce/Screenshot_2020-08-27_at_10.45.39_AM.png]assets/Screenshot_2020-08-27_at_10.45.39_AM.png)
+
+The two function approximation that we have here is actor and another critic, we can use two different neural network to train them the policy update is like an actor which takes the action and the value update is like a critic which looks at these actions.
+
+---
+
+# The Actor-Critic Method
+
+This is something similar to how GANs work the actor first takes a set of action randomly the critic looks at these actions and notes down a feedback ie.. the state value and pass it to the actor so that the actor can improve there technique.
+
+Mathematically this is how it looks like,
+
+![Actor-Critic%20Method%2029e6b0ae5d9f4cc3b1b7af950609e3ce/Screenshot_2020-08-27_at_5.38.17_PM.png]assets/Screenshot_2020-08-27_at_5.38.17_PM.png)
+
+---
+
+# Advantage function
+
+![Actor-Critic%20Method%2029e6b0ae5d9f4cc3b1b7af950609e3ce/Screenshot_2020-08-27_at_5.41.58_PM.png]assets/Screenshot_2020-08-27_at_5.41.58_PM.png)
+
+![Actor-Critic%20Method%2029e6b0ae5d9f4cc3b1b7af950609e3ce/Screenshot_2020-08-27_at_5.42.13_PM.png]assets/Screenshot_2020-08-27_at_5.42.13_PM.png)
+
+---
+
+# Actor-Critic Advantage
+
+![Actor-Critic%20Method%2029e6b0ae5d9f4cc3b1b7af950609e3ce/Screenshot_2020-08-27_at_5.43.20_PM.png]assets/Screenshot_2020-08-27_at_5.43.20_PM.png)
+
+This is how our current functions look like.
+
+if we introduce our advantage function it would look like this
+
+![Actor-Critic%20Method%2029e6b0ae5d9f4cc3b1b7af950609e3ce/Screenshot_2020-08-27_at_5.44.23_PM.png]assets/Screenshot_2020-08-27_at_5.44.23_PM.png)
+
+But in this case the critique now have to handle two q-hat as well as v-hat
+
+But it turns out if we substiture our TD-Error here we would get the expected result.
+
+![Actor-Critic%20Method%2029e6b0ae5d9f4cc3b1b7af950609e3ce/Screenshot_2020-08-27_at_5.45.44_PM.png]assets/Screenshot_2020-08-27_at_5.45.44_PM.png)
+
+---
